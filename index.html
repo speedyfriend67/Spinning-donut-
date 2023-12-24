@@ -67,7 +67,7 @@
   </div>
 
   <script>
-    // Function to change donut with numbers or special symbols
+    // Function to change donut with random values like numbers or special symbols
     function changeDonut() {
       const donut = document.getElementById('donut');
       const randomValue = getRandomValue();
@@ -76,9 +76,8 @@
 
     // Function to generate a random value
     function getRandomValue() {
-      const characters = '0123456789!@#$%^&*()_+[]{}|;:,.<>?';
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      return characters[randomIndex];
+      const randomNumber = Math.floor(Math.random() * 10); // Change 10 to adjust the range of random numbers
+      return randomNumber.toString();
     }
 
     // Function to set custom size and colors
