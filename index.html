@@ -12,11 +12,17 @@
       height: 100vh;
       margin: 0;
       overflow: hidden;
+      background-color: #f0f0f0; /* Default background color */
+      font-family: 'Arial', sans-serif;
+    }
+
+    .container {
+      text-align: center;
     }
 
     .donut {
       font-size: 3em;
-      margin: 0;
+      margin: 10px 0;
       transform-origin: 50% 50%;
       animation-duration: 5s;
       animation-iteration-count: infinite;
@@ -30,41 +36,72 @@
         transform: rotate(360deg);
       }
     }
+
+    .controls {
+      margin-top: 20px;
+    }
+
+    button {
+      font-size: 1em;
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    label {
+      margin: 0 10px;
+    }
   </style>
 </head>
 <body>
-  <p class="donut" id="donut">&#x1F369;</p>
+  <div class="container">
+    <p class="donut" id="donut">0</p>
+  
+    <div class="controls">
+      <label for="fontSize">Font Size:</label>
+      <input type="number" id="fontSize" value="3" min="1" max="10">
+      <label for="textColor">Text Color:</label>
+      <input type="color" id="textColor" value="#000000">
+      <button onclick="generateDonut()">Generate</button>
+    </div>
+  </div>
 
   <script>
-    // Function to change donut randomly
+    // Function to change donut with numbers or special symbols
     function changeDonut() {
       const donut = document.getElementById('donut');
-      const emojis = ['\1F369', '\1F959', '\1F365', '\1F36A']; // Add more UTF-8 codes as needed
-      const randomIndex = Math.floor(Math.random() * emojis.length);
-      donut.innerHTML = emojis[randomIndex];
+      const randomValue = getRandomValue();
+      donut.innerHTML = randomValue;
     }
 
-    // Function to set 2D or 3D mode
-    function setMode(mode) {
+    // Function to generate a random value
+    function getRandomValue() {
+      const characters = '0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      return characters[randomIndex];
+    }
+
+    // Function to set custom size and colors
+    function setCustomStyle() {
       const donut = document.getElementById('donut');
-      if (mode === '2D') {
-        donut.style.animationName = 'spin';
-      } else if (mode === '3D') {
-        donut.style.animationName = 'none'; // Stop the spinning animation for 3D effect
-        // Add additional 3D styling here if needed
-      }
+      const fontSize = document.getElementById('fontSize').value + 'em';
+      const textColor = document.getElementById('textColor').value;
+
+      donut.style.fontSize = fontSize;
+      donut.style.color = textColor;
     }
 
-    // Prompt for mode selection
-    const mode = prompt('Enter mode (2D or 3D):');
-    setMode(mode);
-
-    // Color picker for background color
-    const bgColor = prompt('Choose background color (enter a color name or use a color picker):');
-    document.body.style.backgroundColor = bgColor;
+    // Generate donut when the page loads
+    generateDonut();
 
     // Change donut randomly every 5 seconds
     setInterval(changeDonut, 5000);
+
+    // Function to generate donut manually
+    function generateDonut() {
+      changeDonut();
+      setCustomStyle();
+    }
   </script>
 </body>
 </html>
