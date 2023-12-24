@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spinning Donuts</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .donut {
+      font-size: 3em;
+      animation: spin 5s linear infinite, change 5s infinite;
+      transform-origin: 50% 50%;
+      margin: 0;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes change {
+      0%, 25%, 50%, 75%, 100% {
+        content: '\1F369'; /* Doughnut Emoji */
+      }
+      12.5%, 37.5%, 62.5%, 87.5% {
+        content: '\1F959'; /* Croissant Emoji */
+      }
+    }
+  </style>
+</head>
+<body>
+  <p class="donut" id="donut">&#x1F369;</p>
+
+  <script>
+    // Change donut randomly every 5 seconds
+    setInterval(function() {
+      const donut = document.getElementById('donut');
+      const emojis = ['\1F369', '\1F959', '\1F365', '\1F36A']; // Add more UTF-8 codes as needed
+      const randomIndex = Math.floor(Math.random() * emojis.length);
+      donut.innerHTML = emojis[randomIndex];
+    }, 5000);
+  </script>
+</body>
+</html>
